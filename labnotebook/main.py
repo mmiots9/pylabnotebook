@@ -244,7 +244,7 @@ def get_excluded_patterns():
     try:
         with open('.labignore', 'r') as f:
             excluded_patterns = f.read().splitlines()
-            excluded_patterns = [r'^' + re.escape(pattern) + r'$' for pattern in excluded_patterns]
+            excluded_patterns = [pattern.replace('*', '.*') for pattern in excluded_patterns]
     except FileNotFoundError:
         excluded_patterns = []
     finally:
@@ -260,7 +260,7 @@ def get_commit_info(commit_sha, analysis_ext, excluded_patterns):
     message = subprocess.check_output(['git', 'log', '-n', '1', '--pretty=format:%b', commit_sha], text=True).strip()
     changed_files = subprocess.check_output(['git', 'show', '--pretty=%n', '--name-status', commit_sha], text=True).strip().split('\n')
     changed_files = {file.split('\t')[1] : file.split('\t')[0] for file in changed_files}
-    analysis_files = [key for key,_ in changed_files.items() if any(ext in key for ext in analysis_ext) and not any(re.match(pattern, key) for pattern in excluded_patterns)]
+    analysis_files = [key for key,_ in changed_files.items() if any(ext in key for ext in analysis_ext) and not any([re.search(pattern, key) for pattern in excluded_patterns])]
     commit_info = {'date': date,
                    'author': author,
                    'title': title,

@@ -44,7 +44,7 @@ A .labnotebook folder is created, containing config.json file, a basic .css file
 <h3>Update a notebook</h3>
 When you want to update the notebook, go to the folder in which is present the .git folder, type <code>notebook update</code>. It will check for new commits and upate the files in .labnotebook folder.
 <br>
-If the git history have changed and the last commit present in the labnotebook is no longer in gith history, it will raise an error; you can skip this by forcing the update (<code>-f/--force</code>).
+If the git history have changed and the last commit present in the labnotebook is no longer in git history, it will raise an error; you can skip this by forcing the update (<code>-f/--force</code>).
 
 **IMPORTANT**: After each notebook update a commit is made with labnotebook as author. This will ensure that these commits are not considered during the update, as only commits without labnotebook as author are used.
 
