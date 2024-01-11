@@ -2,7 +2,7 @@ import subprocess
 import re
 from setuptools import setup, find_packages
 from setuptools.command.install import install
-from labnotebook import __version__
+from pylabnotebook import __version__
 from pathlib import Path
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
