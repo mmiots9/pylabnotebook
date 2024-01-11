@@ -257,7 +257,7 @@ def get_commit_info(commit_sha, analysis_ext, excluded_patterns):
     This function returns a dictionary of the information about the commit specified in commit_sha. These info are: date, author, title, message and changed files.
     """
     date, author, title = subprocess.check_output(['git', 'log', '-n', '1', '--pretty=format:%cs%n%an%n%s', commit_sha], text=True).strip().split('\n')
-    message = subprocess.check_output(['git', 'log', '-n', '1', '--pretty=format:%b', commit_sha], text=True).strip()
+    message = subprocess.check_output(['git', 'log', '-n', '1', '--pretty=format:%b', commit_sha], text=True).strip().replace("\n", "<br>\n")
     changed_files = subprocess.check_output(['git', 'show', '--pretty=%n', '--name-status', commit_sha], text=True).strip().split('\n')
     changed_files = {file.split('\t')[1] : file.split('\t')[0] for file in changed_files}
     analysis_files = [key for key,_ in changed_files.items() if any(ext in key for ext in analysis_ext) and not any([re.search(pattern, key) for pattern in excluded_patterns])]
