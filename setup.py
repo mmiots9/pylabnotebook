@@ -50,7 +50,7 @@ setup(
     package_data={'labnotebook': ['templates/*']},
     entry_points={
         'console_scripts': [
-            'labnotebook = labnotebook.main:main',
+            'labnotebook = pylabnotebook.main:main',
         ],
     },
     cmdclass={
