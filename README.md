@@ -35,14 +35,14 @@ The structure of the notebook is very simple. You can see an example <a href='ht
 </ul>
 
 <h3>Create a notebook</h3>
-To create a notebook, go to the folder in which is present the .git folder and type <code>notebook create -n &#60;name_of_the_notebook&#62;</code>. If you want to have spaces in your name, just wrap it into quotes.
+To create a notebook, go to the folder in which is present the .git folder and type <code>labnotebook create -n &#60;name_of_the_notebook&#62;</code>. If you want to have spaces in your name, just wrap it into quotes.
 
 A .labnotebook folder is created, containing config.json file, a basic .css file and three file containing head, body and footer html file.
 
 **IMPORTANT**: never change the name of the created folder and its files!
 
 <h3>Update a notebook</h3>
-When you want to update the notebook, go to the folder in which is present the .git folder, type <code>notebook update</code>. It will check for new commits and upate the files in .labnotebook folder.
+When you want to update the notebook, go to the folder in which is present the .git folder, type <code>labnotebook update</code>. It will check for new commits and upate the files in .labnotebook folder.
 <br>
 If the git history have changed and the last commit present in the labnotebook is no longer in git history, it will raise an error; you can skip this by forcing the update (<code>-f/--force</code>).
 

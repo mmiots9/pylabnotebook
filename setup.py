@@ -47,7 +47,7 @@ setup(
     author_email="miotsdata@gmail.com",
     
     packages=find_packages(),
-    package_data={'labnotebook': ['templates/*']},
+    package_data={'pylabnotebook': ['templates/*']},
     entry_points={
         'console_scripts': [
             'labnotebook = pylabnotebook.main:main',
