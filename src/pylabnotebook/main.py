@@ -175,10 +175,9 @@ def update_labnotebook(force_update: bool) -> None:
     This function updates body.html and config.json files in .labonotebook folder by looping through 
     all commits not already inclded.
 
-    :param force_update: whether to force the update by starting from the beginning of the commit 
-    history. Mandatory if last commit in config.json is no more present in commit history (e.g. 
-    rebase, reset or any change in commit history)
+    :param force_update: whether to force the update by starting from the beginning of the commit history. Mandatory if last commit in config.json is no more present in commit history (e.g. rebase, reset or any change in commit history) # pylint: disable=line-too-long
     :type force_update: bool
+
     """
     # 1. Get useful variables
     # TODO!: move it outside
@@ -405,9 +404,9 @@ def export_labnotebook(output_file: str, force: bool, link: bool) -> None:
     :type output_file: str
     :param force: whether to force the overwriting of output_file if exists.
     :type force: bool
-    :param link: whether to create links to analysis files in analysis files bullet list.
-    These links can be used to open the analysis files directly from the notebook.
+    :param link: whether to create links to analysis files in analysis files bullet list. These links can be used to open the analysis files directly from the notebook. # pylint: disable=line-too-long
     :type link: bool
+
     """
     # 1. Get useful variables
     # TODO! move outside
