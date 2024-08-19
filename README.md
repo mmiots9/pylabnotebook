@@ -1,6 +1,7 @@
 <h1 align="center">Labnotebook 📔🖥</h1>
 
 This project aims to help bioinformaticians in creating the so called "Laboratory notebook" automatically, thanks to git workflow manager.
+Read the [documentation](https://pylabnotebook.readthedocs.io/en/latest/user_guide.html).
 
 **IMPORTANT**: this tool is based on git and its application, in particular, through git history it will create an html notebook divided by date and commit.
 
