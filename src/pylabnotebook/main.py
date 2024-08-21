@@ -324,7 +324,10 @@ def get_commit_info(commit_sha: str, analysis_ext: list[str], excluded_patterns:
     :rtype: dict
     """
     date, author, title = subprocess.check_output(['git', 'log', '-n', '1', '--pretty=format:%cs%n%an%n%s', commit_sha], text = True).strip().split('\n') # pylint: disable=line-too-long
-    message: str = subprocess.check_output(['git', 'log', '-n', '1', '--pretty=format:%b', commit_sha], text=True).strip().replace("\n", "<br>\n") # pylint: disable=line-too-long
+    message: str = subprocess.check_output(['git', 'log', '-n', '1', '--pretty=format:%b', commit_sha], text=True).strip() # pylint: disable=line-too-long
+    pattern: str = r"(\.|:|!|\?)\n"
+    replacement: str = r"\1<br>\n"
+    message = re.sub(pattern, replacement, message).replace('\n\n', '\n<br>\n')
     changed_files: str = subprocess.check_output(['git', 'show', '--pretty=%n', '--name-status', commit_sha], text=True).strip().split('\n') # pylint: disable=line-too-long
     changed_files: dict = {file.split('\t')[1] : file.split('\t')[0] for file in changed_files}
     analysis_files: list[str] = [key for key, _ in changed_files.items()
