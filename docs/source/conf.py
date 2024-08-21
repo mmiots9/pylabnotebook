@@ -14,7 +14,7 @@ import pylabnotebook
 project = 'pylabnotebook'
 copyright = '2024, Matteo Miotto'
 author = 'Matteo Miotto'
-release = '0.1.11'
+release = '0.2.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

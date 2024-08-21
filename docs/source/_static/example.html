@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example lab notebook</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        background-color: rgba(193, 239, 175, 0.8);
+        height: 100%;
+      }
+
+      body {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        max-width: 75%;
+        min-height: 100vh;
+      }
+
+      header {
+        padding: 1rem;
+      }
+
+      main {
+        flex: 1;
+      }
+
+      h1 {
+        color: red;
+        font-size: 2.5em;
+        text-align: center;
+      }
+
+      h2 {
+        border: 1px solid red;
+        font-size: 1.875em;
+        margin: 0 0.5rem;
+        text-align: center;
+      }
+
+      h3 {
+        font-weight: bold;
+        font-size: 1.2em;
+        margin: 1em 0em 0.2em 0em;
+        text-align: center;
+      }
+
+      details {
+        cursor: pointer;
+        display: inline;
+        font-size: 1em;
+      }
+
+      details li {
+        cursor: text;
+        font-size: 1em;
+        margin-left: 3em;
+        padding-left: 0.5em;
+      }
+
+      p {
+        font-size: 1em;
+        margin: 0.2em 0em;
+      }
+
+      .analyses-el {
+        display: block;
+        margin-bottom: 0.3rem;
+      }
+
+      .analyses-el li {
+        margin-left: 3em;
+        padding-left: 0.5em;
+      }
+
+      .commit-el {
+        padding: 1rem;
+      }
+
+      .author-el {
+        margin-top: 1em;
+      }
+
+      footer {
+        align-items: center;
+        border-top: 1px solid rgb(139, 145, 111);
+        display: flex;
+        justify-content: center;
+        min-height: 40px;
+        height: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 id="labtitle">Example lab notebook</h1>
+      <p id="creationdate">Created on: 2024-08-14</p>
+      <p id="labauthor">Author: mmiots9</p>
+    </header>
+    <main>
+      <h2 class="day-el">2024-08-14</h2>
+
+      <div class="commit-el" id="6b10089">
+        <h3 class="title-el">This is a test commit, the first one</h3>
+        <p class="mess-el">
+          This is the message of the commit, which may contain multiline
+          comments.<br />
+          <br />
+          Comment:<br />
+          This line will not end here, but it will end with a fullstop that I
+          put now.<br />
+          This is a new line, as new lines are made after a fullstop, a colon, a
+          question mark or a fullmark that in the original commit message are
+          followed by a newline.
+        </p>
+        <p class="author-el">Author: mmiots9</p>
+        <p class="sha-el">sha: 6b10089</p>
+        <div class="analyses-el">
+          Analysis file/s:
+          <ul class="analysis_list">
+            <li>
+              <code><a href="google.com" target="_blank">a.html</a></code> (this
+              is an example, the link is broken and point to google, but just in
+              this documentation).
+            </li>
+          </ul>
+        </div>
+        <details>
+          <summary>Changed files</summary>
+          <ul class="changed_list">
+            <li>a.html</li>
+          </ul>
+        </details>
+      </div>
+
+      <h2 class="day-el">2024-08-21</h2>
+
+      <div class="commit-el" id="6b10080">
+        <h3 class="title-el">This is another commit done on another day</h3>
+        <p class="mess-el">Single line comment</p>
+        <p class="author-el">Author: mmiots9</p>
+        <p class="sha-el">sha: 6b10080</p>
+        <div class="analyses-el">
+          Analysis file/s:
+          <ul class="analysis_list">
+            <li>
+              <code><a href="google.com" target="_blank">a.html</a></code> (this
+              is an example, the link is broken and point to google, but just in
+              this documentation).
+            </li>
+          </ul>
+        </div>
+        <details>
+          <summary>Changed files</summary>
+          <ul class="changed_list">
+            <li>a.html</li>
+            <li>test/file1.txt</li>
+          </ul>
+        </details>
+      </div>
+    </main>
+  </body>
+  <footer>
+    <p>
+      Made with
+      <a href="https://github.com/mmiots9/pylabnotebook" target="_blank"
+        >pylabnotebook</a
+      >
+      &copy; mmiots9, 2024
+    </p>
+  </footer>
+</html>
