@@ -7,6 +7,12 @@ For reporting bugs or other issues with pylabnotebook please use: https://github
 
 For any other questions please contact us via miotsdata@gmail.com.
 
+View and example of labnotebook |example_link|.
+
+.. |example_link| raw:: html
+
+   <a href="./_static/example.html" target="_blank">here</a>
+
 .. toctree::
    :caption: Tool Guide:
 
