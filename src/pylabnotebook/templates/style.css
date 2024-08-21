@@ -1,18 +1,20 @@
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
+    background-color: rgba(193, 239, 175, 0.8);
     height: 100%;
 }
 
 body {
-    margin: auto;
-    max-width: 75%;
+    background-color: white;
     display: flex;
     flex-direction: column;
+    margin: auto;
+    max-width: 75%;
     min-height: 100vh;
 }
 
@@ -26,42 +28,45 @@ main {
 
 h1 {
     color: red;
-    text-align: center;
     font-size: 2.5em;
+    text-align: center;
 }
 
 h2 {
-    text-align: center;
     border: 1px solid red;
     font-size: 1.875em;
+    margin: 0 0.5rem;
+    text-align: center;
 }
 
 h3 {
     font-weight: bold;
-    margin: 1em 0em 0.2em 0em;
     font-size: 1.2em;
+    margin: 1em 0em 0.2em 0em;
+    text-align: center;
 }
 
 details {
-    font-size: 1em;
     cursor: pointer;
     display: inline;
+    font-size: 1em;
 }
 
 details li {
     cursor: text;
-    padding-left: 0.5em;
     font-size: 1em;
     margin-left: 3em;
+    padding-left: 0.5em;
 }
 
 p {
-    margin: 0.2em 0em;
     font-size: 1em;
+    margin: 0.2em 0em;
 }
 
 .analyses-el {
     display: block;
+    margin-bottom: 0.3rem;
 }
 
 .analyses-el li {
