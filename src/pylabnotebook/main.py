@@ -12,6 +12,12 @@ import re
 from typing import Union
 from .version import __version__
 
+# Useful values
+YELLOW: str = '\033[0;33m'
+GREEN: str = '\033[0;32m'
+NCOL: str = '\033[0m'
+RED: str = '\033[0;31m'
+
 def create_labnotebook(name: str) -> None:
     """Create new labnotebook.
 
@@ -40,11 +46,6 @@ def create_labnotebook(name: str) -> None:
     aut: str = subprocess.check_output(["git", "config", "--get", "user.name"],
                                        universal_newlines = True).strip()
 
-    # TODO! Move these out of the function
-    yellow: str = '\033[0;33m'
-    green: str = '\033[0;32m'
-    ncol: str = '\033[0m'
-
     # 4. Create config file
     create_config_json(name = name, aut = aut)
 
@@ -62,10 +63,10 @@ def create_labnotebook(name: str) -> None:
     shutil.copy(css_template_path, new_css_path)
 
     # 7. Return messages
-    print(f"\n{green}.labnotebook folder successfully created")
-    print(f"{yellow}Mandatory: when updating the notebook, make sure you are in {os.getcwd()}")
+    print(f"\n{GREEN}.labnotebook folder successfully created")
+    print(f"{YELLOW}Mandatory: when updating the notebook, make sure you are in {os.getcwd()}")
     print("Never change the .labnotebook folder name or content")
-    print(ncol)
+    print(NCOL)
 
 
 def create_config_json(name: str, aut: str) -> None:
@@ -179,13 +180,10 @@ def update_labnotebook(force_update: bool) -> None:
     :type force_update: bool
 
     """
-    # 1. Get useful variables
-    # TODO!: move it outside
-    red: str = '\033[0;31m'
 
     # 2. Check for .labnotebook folder and config.json files
     if not os.path.exists(".labnotebook"):
-        print(f"{red}Error: There is no .labnotebook folder in the current working directory. "
+        print(f"{RED}Error: There is no .labnotebook folder in the current working directory. "
               "Please go to the folder where .labnotebook is.")
         sys.exit(2)
 
@@ -194,14 +192,14 @@ def update_labnotebook(force_update: bool) -> None:
         with open(config_file, "r", encoding = 'utf8') as config_file:
             config: dict = json.load(config_file)
     except FileNotFoundError:
-        print(f"{red}Error: There is no config file in .labnotebook folder. Please provide the config file.") # pylint: disable=line-too-long
+        print(f"{RED}Error: There is no config file in .labnotebook folder. Please provide the config file.") # pylint: disable=line-too-long
         sys.exit(2)
 
     # 3. Check for staged files
     git_status: str = subprocess.run("git status", shell = True, stdout = subprocess.PIPE,
                                 text = True, check = False)
     if "Changes to be committed:" in git_status.stdout:
-        print(f"{red}Error: You have staged files to be committed. This is incompatible with updatenotebook. " # pylint: disable=line-too-long
+        print(f"{RED}Error: You have staged files to be committed. This is incompatible with updatenotebook. " # pylint: disable=line-too-long
               "Please commit those changes, restore the files, or stage them prior to running this function.") # pylint: disable=line-too-long
         sys.exit(1)
 
@@ -247,10 +245,6 @@ def get_sha_list(last_commit: Union[str, None]) -> list[str]:
     :rtype: list[str]
     """
 
-    # TODO!: move outside the funtion
-    red: str = '\033[0;31m'
-    yellow: str = '\033[1;33m'
-
     # 1. Get list of all commits
     git_sha: list[str] = subprocess.run("git log --pretty=format:%h --reverse", shell = True,
                                         stdout = subprocess.PIPE, text = True, check = False).stdout.split('\n') # pylint: disable=line-too-long
@@ -258,7 +252,7 @@ def get_sha_list(last_commit: Union[str, None]) -> list[str]:
     # 2. Subset for new commits
     # 2.1 If git history is empty, return error
     if git_sha == ['']:
-        print(f"{red}Error: Git history is empty")
+        print(f"{RED}Error: Git history is empty")
         sys.exit(5)
 
     # 2.2 Return all if last commit is None
@@ -267,7 +261,7 @@ def get_sha_list(last_commit: Union[str, None]) -> list[str]:
 
     # 2.3 Raise error if last commit is not in git_sha list
     if last_commit not in git_sha:
-        print(f"{red}Error: Last commit used for the lab notebook ({last_commit}) is not in the current git log history." # pylint: disable=line-too-long
+        print(f"{RED}Error: Last commit used for the lab notebook ({last_commit}) is not in the current git log history." # pylint: disable=line-too-long
               f"\nIt is possible that you have changed commit history. Please check your git log and insert the commit SHA to use in the config file or force the update to start again from the beginning of the git history using labnotebook update -f/--force.") # pylint: disable=line-too-long
         sys.exit(5)
 
@@ -277,7 +271,7 @@ def get_sha_list(last_commit: Union[str, None]) -> list[str]:
 
     # 2.5 Interrupt if last_commit is actually the last commit in history
     if len(git_sha) == 0:
-        print(f"{yellow}Warning: LAST_COMMIT is already the last commit in history. Nothing to update.") # pylint: disable=line-too-long
+        print(f"{YELLOW}Warning: LAST_COMMIT is already the last commit in history. Nothing to update.") # pylint: disable=line-too-long
         sys.exit(5)
 
     # 3. Return git_sha
@@ -411,13 +405,10 @@ def export_labnotebook(output_file: str, force: bool, link: bool) -> None:
     :type link: bool
 
     """
-    # 1. Get useful variables
-    # TODO! move outside
-    red: str = '\033[0;31m'
 
     # 2. Check for .labnotebook folder, config.json and .html files
     if not os.path.exists(".labnotebook"):
-        print(f"{red}Error: There is no .labnotebook folder in the current working directory. "
+        print(f"{RED}Error: There is no .labnotebook folder in the current working directory. "
               "Please go to the folder where .labnotebook is.")
         sys.exit(2)
 
@@ -426,7 +417,7 @@ def export_labnotebook(output_file: str, force: bool, link: bool) -> None:
         with open(config_file, "r", encoding = 'utf8') as config_file:
             config: dict = json.load(config_file)
     except FileNotFoundError:
-        print(f"{red}Error: There is no config file in .labnotebook folder. Please provide the config file.") # pylint: disable=line-too-long
+        print(f"{RED}Error: There is no config file in .labnotebook folder. Please provide the config file.") # pylint: disable=line-too-long
         sys.exit(2)
 
     required_files: list[str] = [
@@ -443,7 +434,7 @@ def export_labnotebook(output_file: str, force: bool, link: bool) -> None:
 
     # 3. Check if file already exists and force is False
     if os.path.exists(output_file) and not force:
-        print(f"{red}Error: {output_file} already exists. Use -f/--force to overwrite it.")
+        print(f"{RED}Error: {output_file} already exists. Use -f/--force to overwrite it.")
         sys.exit(1)
 
     # 4. Read head.html and edit it
