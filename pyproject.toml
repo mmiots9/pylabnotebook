@@ -1,6 +1,6 @@
 [project]
 name = "pylabnotebook"
-version = "0.2.0"
+version = "0.2.1"
 description = "This package provides functions to write an automated labnotebook using git."
 authors = [
     {name = "Matteo Miotto", email = "miotsdata@gmail.com"},

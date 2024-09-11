@@ -58,11 +58,12 @@ Prior to export the final .html version of the notebook, you have to update the 
    (.venv) $ labnotebook update
 
 This command will evaluate git history from the last commit stored in .labnotebook/config.json. This means that, if the git history has changed and the last commit in .labnotebook/config.json is *not* in the new git history, this will raise an error. To prevent this error, you could force labnotebook update to start from the beginning of git history through the `-f/--force` flag.
+After the update, a new commit with the changes in .labnotebook folder is created: this commit has *labnotebook* and *labnotebook@email.com* as author and email, respectively.
 
 Link to analysis files
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-When updating the notebook, it automatically create a list of analysis files for each commit with direct links to them. By default, it takes all the .html files changed/added in that commit.
+When updating the notebook, it automatically create a list of analysis files for each commit with direct links to them. By default, it takes all the .html files changed/added in that commit (not the deleted or renamed ones).
 If you want to add different extensions, you can update the .labnotebook config.json file by adding/removing extensions in the ANALYSIS_EXT variable. Each extension should be separated by a comma, as it is considered an array (eg. "ANALYSIS_EXT": ['.html', '.txt']): just type the extension, not wildcards or other special characters.
 Moreover, by creating a ".labignore" file, you can exclude some files/folders to be recognized as analysis files (as for a standard .gitignore file it will use wildcards).
 

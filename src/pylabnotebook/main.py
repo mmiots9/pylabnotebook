@@ -187,9 +187,9 @@ def update_labnotebook(force_update: bool) -> None:
               "Please go to the folder where .labnotebook is.")
         sys.exit(2)
 
-    config_file: str = os.path.join(".labnotebook", "config.json")
+    config_file_path: str = os.path.join(".labnotebook", "config.json")
     try:
-        with open(config_file, "r", encoding = 'utf8') as config_file:
+        with open(config_file_path, "r", encoding = 'utf8') as config_file:
             config: dict = json.load(config_file)
     except FileNotFoundError:
         print(f"{RED}Error: There is no config file in .labnotebook folder. Please provide the config file.") # pylint: disable=line-too-long
@@ -207,7 +207,7 @@ def update_labnotebook(force_update: bool) -> None:
     if force_update:
         create_config_json(name = config.get('NOTEBOOK_NAME'),
                            aut = config.get('LAB_AUTHOR'))
-        with open(config_file, "r", encoding = 'utf8') as config_file:
+        with open(config_file_path, "r", encoding = 'utf8') as config_file:
             config: dict = json.load(config_file)
         create_body_html(name = config.get('NOTEBOOK_NAME'),
                          today = datetime.now().strftime('%Y-%m-%d'),
@@ -231,6 +231,9 @@ def update_labnotebook(force_update: bool) -> None:
 
     # 8. Write info into body.html and update config
     write_update_files(commits_info, body_content, config)
+
+    # 9. Commit changes in .labnotebook folder
+    commit_labnotebook()
 
 
 def get_sha_list(last_commit: Union[str, None]) -> list[str]:
@@ -325,7 +328,8 @@ def get_commit_info(commit_sha: str, analysis_ext: list[str], excluded_patterns:
     changed_files: str = subprocess.check_output(['git', 'show', '--pretty=%n', '--name-status', commit_sha], text=True).strip().split('\n') # pylint: disable=line-too-long
     changed_files: dict = {file.split('\t')[1] : file.split('\t')[0] for file in changed_files}
     analysis_files: list[str] = [key for key, _ in changed_files.items()
-                                 if any(ext in key for ext in analysis_ext) and not
+                                 if any(ext in key for ext in analysis_ext) and
+                                 os.path.isfile(key) and not
                                  any(re.search(pattern, key) for pattern in excluded_patterns)]
     commit_info: dict = {'date': date,
                          'author': author,
@@ -351,6 +355,11 @@ def write_update_files(commits_info: dict, body_content: str, config: dict) -> N
     """
     # 1. Loop through commits
     for sha, commit in commits_info.items():
+
+        # 1.1 Check if labnotebook commit and ignore it
+        if commit.get('author') == "labnotebook":
+            continue
+
         # 1.1 Check last day
         if config.get('LAST_DAY') != commit.get('date'):
             body_content += f"<h2 class='day-el'>{commit.get('date')}</h2>\n\n"
@@ -464,6 +473,21 @@ def export_labnotebook(output_file: str, force: bool, link: bool) -> None:
     with open(output_file, 'w', encoding = 'utf8') as of:
         of.write(output_content)
 
+def commit_labnotebook() -> None:
+    """Commit .labnotebook folder changes.
+
+    This function adds and commits changes in .labnotebook folder by using 'labnotebook' as author
+    and 'labnotebook@email.com' as email.
+    """
+
+    subprocess.run('git add .labnotebook >/dev/null', #pylint: disable=line-too-long
+                   shell = True,
+                   stdout = subprocess.PIPE, text = True, check = False)
+
+    subprocess.run('GIT_COMMITTER_NAME="labnotebook" GIT_COMMITTER_EMAIL="labnotebook@email.com" git commit --author="labnotebook <labnotebook@email.com>" -m "update notebook" >/dev/null', #pylint: disable=line-too-long
+                   shell = True,
+                   stdout = subprocess.PIPE, text = True, check = False)
+
 
 def main():
     """Main cli function handler.
@@ -496,6 +520,9 @@ def main():
     export_parser.add_argument("-l", "--link", default = False, action = "store_true",
                                help = "Link style file in head. By default style file is copied in <style></style> tags in head") # pylint: disable=line-too-long
 
+    subparsers.add_parser("commit",
+                          help = "Add and commit changes in .labnotebook folder using labnotebook as author") # pylint: disable=line-too-long
+
     args = parser.parse_args()
 
     if args.command == "create":
@@ -508,6 +535,8 @@ def main():
         if not args.output:
             export_parser.error("-o/--output is required for the 'export' command. Please provide the name of the output file.") # pylint: disable=line-too-long
         export_labnotebook(args.output, args.force, args.link)
+    elif args.command == "commit":
+        commit_labnotebook()
     else:
         parser.print_help()
 

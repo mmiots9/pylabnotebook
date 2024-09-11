@@ -11,7 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Sidebar with links to dates in order (to move easier throughout the document).
 - Configuration command for cli.
-- Notebook commit command.
+
+## [0.2.1] - 2024-09-11
+
+### Added
+
+- New notebook commit command that commits changes in .labnotebook folder.
+
+### Fixed
+
+- Remove link to non-existing analysis files (deleted or renamed in the commit).
 
 ## [0.2.0] - 2024-08-21
 
@@ -25,4 +34,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated version of example page in documentation.
 
 [unreleased]: https://github.com/mmiots9/pylabnotebook/compare/v0.2.0...HEAD
+[0.2.1]: https://github.com/mmiots9/pylabnotebook/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/mmiots9/pylabnotebook/compare/v0.1.11...v0.2.0

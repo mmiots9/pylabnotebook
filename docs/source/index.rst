@@ -9,19 +9,18 @@ For any other questions please contact us via miotsdata@gmail.com.
 
 View and example of labnotebook |example_link|.
 
-What's new in version 0.2.0
+What's new in version 0.2.1
 ------------------------------------
 
-Changed
+Added
 ^^^^^^^^^^
 
-- New default style for the output notebook.
+- New notebook commit command that commits changes in .labnotebook folder.
 
 Fixed
 ^^^^^^^^^
 
-- New behaviour for newlines in message section. It will now put a newline tag whenever it finds a newline sign from the original commit message which follows a fullstop, a question mark, an exclamation mark or a colon.
-- Updated version of example page in documentation.
+- Remove link to non-existing analysis files (deleted or renamed in the commit).
 
 .. |example_link| raw:: html
 
