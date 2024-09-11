@@ -33,6 +33,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New behaviour for newlines in message section. It will now put a newline tag whenever it finds a newline sign from the original commit message which follows a fullstop, a question mark, an exclamation mark or a colon.
 - Updated version of example page in documentation.
 
-[unreleased]: https://github.com/mmiots9/pylabnotebook/compare/v0.2.0...HEAD
-[0.2.1]: https://github.com/mmiots9/pylabnotebook/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/mmiots9/pylabnotebook/compare/v0.1.11...v0.2.0
+[unreleased]: https://github.com/mmiots9/pylabnotebook/compare/0.2.1...HEAD
+[0.2.1]: https://github.com/mmiots9/pylabnotebook/compare/0.2.0...0.2.1
+[0.2.0]: https://github.com/mmiots9/pylabnotebook/compare/v0.1.11..v0.2.0
