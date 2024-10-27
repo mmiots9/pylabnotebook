@@ -1,0 +1,8 @@
+<button id="bottom-btn"><a href="#bottom">Go to last</a></button>
+<div id="bottom"></div>
+
+#bottom-btn { position: fixed; bottom: 20px; /* Distance from the bottom of the
+page */ right: 20px; /* Distance from the right side of the page */ padding:
+10px 20px; background-color: #1e871b; /* Button color */ color: white; border:
+none; border-radius: 5px; font-size: 16px; cursor: pointer; } #bottom-btn {
+background-color: #0056b3; /* Color on hover */ }

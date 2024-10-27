@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:973b117eafbd4b3dc2eeb125d0fe307e63f0a94079fa432a46d46c1a5f607358"
+content_hash = "sha256:70027abc4d50118fb636d613ff7e8d429453aa66ed92ddebd2fe64854f9fff94"
 
 [[metadata.targets]]
 requires_python = ">=3.10"
@@ -374,14 +374,14 @@ files = [
 
 [[package]]
 name = "setuptools"
-version = "72.1.0"
+version = "75.2.0"
 requires_python = ">=3.8"
 summary = "Easily download, build, install, upgrade, and uninstall Python packages"
 groups = ["default"]
 marker = "python_version >= \"3.10\""
 files = [
-    {file = "setuptools-72.1.0-py3-none-any.whl", hash = "sha256:5a03e1860cf56bb6ef48ce186b0e557fdba433237481a9a625176c2831be15d1"},
-    {file = "setuptools-72.1.0.tar.gz", hash = "sha256:8d243eff56d095e5817f796ede6ae32941278f542e0f941867cc05ae52b162ec"},
+    {file = "setuptools-75.2.0-py3-none-any.whl", hash = "sha256:a7fcb66f68b4d9e8e66b42f9876150a3371558f98fa32222ffaa5bced76406f8"},
+    {file = "setuptools-75.2.0.tar.gz", hash = "sha256:753bb6ebf1f465a1912e19ed1d41f403a79173a9acf66a42e7e6aec45c3c16ec"},
 ]
 
 [[package]]
@@ -429,19 +429,19 @@ files = [
 
 [[package]]
 name = "sphinx-rtd-theme"
-version = "2.0.0"
-requires_python = ">=3.6"
+version = "3.0.1"
+requires_python = ">=3.8"
 summary = "Read the Docs theme for Sphinx"
 groups = ["default"]
 marker = "python_version >= \"3.10\""
 dependencies = [
-    "docutils<0.21",
-    "sphinx<8,>=5",
+    "docutils<0.22,>0.18",
+    "sphinx<9,>=6",
     "sphinxcontrib-jquery<5,>=4",
 ]
 files = [
-    {file = "sphinx_rtd_theme-2.0.0-py2.py3-none-any.whl", hash = "sha256:ec93d0856dc280cf3aee9a4c9807c60e027c7f7b461b77aeffed682e68f0e586"},
-    {file = "sphinx_rtd_theme-2.0.0.tar.gz", hash = "sha256:bd5d7b80622406762073a04ef8fadc5f9151261563d47027de09910ce03afe6b"},
+    {file = "sphinx_rtd_theme-3.0.1-py2.py3-none-any.whl", hash = "sha256:921c0ece75e90633ee876bd7b148cfaad136b481907ad154ac3669b6fc957916"},
+    {file = "sphinx_rtd_theme-3.0.1.tar.gz", hash = "sha256:a4c5745d1b06dfcb80b7704fe532eb765b44065a8fad9851e4258c8804140703"},
 ]
 
 [[package]]
