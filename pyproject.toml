@@ -27,7 +27,7 @@ Homepage = "https://github.com/mmiots9/pylabnotebook"
 Issues =  "https://github.com/mmiots9/pylabnotebook/issues"
 
 [project.scripts]
-labnotebook = "pylabnotebook.main:main"
+labnotebook = "pylabnotebook.cli:main"
 
 [build-system]
 requires = ["pdm-backend"]
