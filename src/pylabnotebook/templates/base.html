@@ -18,6 +18,8 @@
     </header>
     {% set ns = namespace(last_date = None) %}
     <main>
+      <button id="bottom-btn" class="go-bottom">&#x25BC;</button>
+
       {% for sha, commit in commits_info.items() %} {% if commit['date'] !=
       ns.last_date %}
       <h2 class="day-el">{{ commit.get('date') }}</h2>
@@ -70,5 +72,29 @@
         >&copy; mmiots9, 2024
       </p>
     </footer>
+    <script>
+      document
+        .getElementById("bottom-btn")
+        .addEventListener("click", function () {
+          const button = this;
+          const isScrollingToBottom = button.className === "go-bottom";
+
+          button.innerHTML = isScrollingToBottom ? "&#x25B2;" : "&#x25BC;";
+
+          if (isScrollingToBottom) {
+            window.scrollTo({
+              top: document.body.scrollHeight,
+              behavior: "smooth",
+            });
+          } else {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }
+
+          button.classList.toggle("go-bottom");
+        });
+    </script>
   </body>
 </html>
