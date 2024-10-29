@@ -6,12 +6,13 @@ This module contains notebook init functions.
 
 import subprocess
 import os
-import json
+from jinja2 import Environment, FileSystemLoader
 
 from .exceptions import NotGitRepoError
 
 # useful values
 GREEN: str = '\033[0;32m'
+SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
 
 
 def init_labnotebook(name: str) -> None:
@@ -34,36 +35,31 @@ def init_labnotebook(name: str) -> None:
     os.chdir(git_root)
 
     # 2. Get useful variables
-    aut: str = subprocess.check_output(["git", "config", "--get", "user.name"],
-                                       universal_newlines = True).strip()
+    author: str = subprocess.check_output(["git", "config", "--get", "user.name"],
+                                          universal_newlines = True).strip()
 
     # 3. Create config file
-    create_config_json(name = name, aut = aut)
+    create_config_json(name = name, author = author)
 
     # 4. Return messages
     print(f"\n{GREEN}Created .labnotebookrc in {git_root}. Please edit it if you want to change labnotebook export behaviour.") # pylint: disable=line-too-long
 
 
-def create_config_json(name: str, aut: str) -> None:
+def create_config_json(name: str, author: str) -> None:
     """Create configuration file.
 
     This function creates the config.json file of the notebook inside .labnotebook folder.
 
     :param name: Name of the notebook.
     :type name: str
-    :param aut: Author of the notebook.
-    :type aut: str
+    :param author: Author of the notebook.
+    :type author: str
     """
-    script_dir: str = os.path.dirname(os.path.abspath(__file__))
+    environment = Environment(loader=FileSystemLoader(f"{SCRIPT_DIR}/templates/"))
+    template = environment.get_template("rc")
+    content = template.render(name = name,
+                              author = author,
+                              script_dir = SCRIPT_DIR)
 
-    config: dict = {"NOTEBOOK_NAME": f"{name}",
-                    "LAB_AUTHOR": f"{aut}",
-                    "REVERSE_HISTORY": False,
-                    "SHOW_ANALYSIS_FILES": True,
-                    "LAB_CSS": f"{script_dir}/templates/style.css",
-                    "ANALYSIS_EXT": ['.html'],
-                    "ANALYSIS_IGNORE": []}
-
-    filename: str = '.labnotebookrc'
-    with open(filename, 'w', encoding = 'utf8') as file:
-        json.dump(config, file, indent = 4)
+    with open(".labnotebookrc", mode="w", encoding="utf-8") as config:
+        config.write(content)

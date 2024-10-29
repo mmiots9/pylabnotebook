@@ -8,7 +8,7 @@ This module contains notebook export functions.
 
 import subprocess
 import os
-import json
+import yaml
 import re
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
@@ -47,7 +47,7 @@ def export_labnotebook(output_file: str, force: bool, link: bool) -> None:
         raise NotInitializedError(f"{RED}Error: There is no .labnotebookrc file in git repository root folder. Please, run labnotebook create -n <name_of_the_project>")
 
     with open(".labnotebookrc", "r", encoding = 'utf8') as config_file:
-        config: dict = json.load(config_file)
+        config: dict = yaml.safe_load(config_file)
 
     # 3. Check if file already exists and force is False
     if os.path.exists(output_file) and not force:
