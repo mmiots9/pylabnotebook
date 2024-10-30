@@ -1,10 +1,6 @@
 pylabnotebook
 =================
 
-Source code
---------------
+.. autofunction:: pylabnotebook.init.init_labnotebook
 
-.. automodule:: pylabnotebook.main
-    :members: create_labnotebook, update_labnotebook, export_labnotebook
-    :undoc-members:
-    :show-inheritance:
+.. autofunction:: pylabnotebook.export.export_labnotebook
