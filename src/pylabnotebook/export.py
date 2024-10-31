@@ -17,6 +17,7 @@ from .exceptions import NotGitRepoError, NotInitializedError, OutputAlreadyExist
 
 # useful values
 RED: str = '\033[0;31m'
+NCOL: str = '\033[0m'
 SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
 
 def export_labnotebook(output_file: str, force: bool, link: bool) -> None:
@@ -44,14 +45,14 @@ def export_labnotebook(output_file: str, force: bool, link: bool) -> None:
 
     # 2. Check for .labnotebookrc
     if not os.path.exists(".labnotebookrc"):
-        raise NotInitializedError(f"{RED}Error: There is no .labnotebookrc file in git repository root folder. Please, run labnotebook create -n <name_of_the_project>")
+        raise NotInitializedError(f"{RED}Error: There is no .labnotebookrc file in git repository root folder. Please, run labnotebook create -n <name_of_the_project>{NCOL}")
 
     with open(".labnotebookrc", "r", encoding = 'utf8') as config_file:
         config: dict = yaml.safe_load(config_file)
 
     # 3. Check if file already exists and force is False
     if os.path.exists(output_file) and not force:
-        raise OutputAlreadyExistsError(f"{RED}Error: {output_file} already exists. Use -f/--force to overwrite it.")
+        raise OutputAlreadyExistsError(f"{RED}Error: {output_file} already exists. Use -f/--force to overwrite it.{NCOL}")
 
     # 5. Get list of commits sha
     sha_list: list[str] = get_sha_list(config.get("REVERSE_HISTORY"))
@@ -97,7 +98,7 @@ def get_sha_list(reverse_history: bool) -> list[str]:
     try:
         git_sha: list[str] = subprocess.check_output(git_command, text = True, stderr=subprocess.PIPE).split('\n')
     except subprocess.CalledProcessError:
-        raise EmptyHisoryError(f"{RED}Error: Git history is empty") from None
+        raise EmptyHisoryError(f"{RED}Error: Git history is empty{NCOL}") from None
 
     return git_sha
 

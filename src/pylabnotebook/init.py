@@ -12,6 +12,7 @@ from .exceptions import NotGitRepoError
 
 # useful values
 GREEN: str = '\033[0;32m'
+NCOL: str = '\033[0m'
 SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
 
 
@@ -42,7 +43,7 @@ def init_labnotebook(name: str) -> None:
     create_config_json(name = name, author = author)
 
     # 4. Return messages
-    print(f"\n{GREEN}Created .labnotebookrc in {git_root}. Please edit it if you want to change labnotebook export behaviour.") # pylint: disable=line-too-long
+    print(f"\n{GREEN}Created .labnotebookrc in {git_root}. Please edit it if you want to change labnotebook export behaviour.{NCOL}") # pylint: disable=line-too-long
 
 
 def create_config_json(name: str, author: str) -> None:

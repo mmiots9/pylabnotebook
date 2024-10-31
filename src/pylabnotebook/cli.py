@@ -35,8 +35,8 @@ def main():
     export_parser.add_argument("-f", "--force",
                                help = "Force the overwriting of the output file if already present",
                                default = False, action = "store_true")
-    export_parser.add_argument("-l", "--link", default = False, action = "store_true",
-                               help = "Link style file in head. By default style file is copied in <style></style> tags in head") # pylint: disable=line-too-long
+    export_parser.add_argument("--no-link", default = False, action = "store_true",
+                               help = "Disable links to analyses files.") # pylint: disable=line-too-long
 
     args = parser.parse_args()
 
@@ -48,7 +48,7 @@ def main():
             sys.exit(128)
     elif args.command == "export":
         try:
-            export_labnotebook(args.output, args.force, args.link)
+            export_labnotebook(args.output, args.force, not args.no_link)
         except NotGitRepoError as e:
             print(e)
             sys.exit(128)
