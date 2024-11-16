@@ -10,7 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Sidebar with links to dates in order (to move easier throughout the document).
-- Configuration command for cli.
+
+## [0.3.1] - 2024-11-15
+
+### Fix
+
+- Change --link flag for export to --no-link. Default now is to have links to analysis files, to diable use --no-link flag.
 
 ## [0.3.0] - 2024-10-30
 
@@ -45,7 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New behaviour for newlines in message section. It will now put a newline tag whenever it finds a newline sign from the original commit message which follows a fullstop, a question mark, an exclamation mark or a colon.
 - Updated version of example page in documentation.
 
-[unreleased]: https://github.com/mmiots9/pylabnotebook/compare/0.3.0...HEAD
+[unreleased]: https://github.com/mmiots9/pylabnotebook/compare/0.3.1...HEAD
+[0.3.1]: https://github.com/mmiots9/pylabnotebook/compare/0.3.0...0.3.1
 [0.3.0]: https://github.com/mmiots9/pylabnotebook/compare/0.2.1...0.3.0
 [0.2.1]: https://github.com/mmiots9/pylabnotebook/compare/0.2.0...0.2.1
 [0.2.0]: https://github.com/mmiots9/pylabnotebook/compare/v0.1.11..v0.2.0
