@@ -79,3 +79,5 @@ If you want to add different extensions, you can update the `.labnotebookrc` fil
 
 Moreover, changing values inside "ANALYSIS_IGNORE" list, you can exclude some files/folders to be recognized as analysis files (as for a standard .gitignore file it will use wildcards).
 
+If you want to disable all links, pass the `no-link` flag to the export command.
+
